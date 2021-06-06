@@ -1,12 +1,24 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/posts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Ninja Locus Using React</h1>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    // Fetch the posts through API call
+    this.props.dispatch(fetchPosts());
+  }
+
+  render() {
+    console.log('PROPS', this.props);
+    return <div>App</div>;
+  }
 }
 
-export default App;
+// Required data for the App as props from the store
+function mapStateToProps(state) {
+  return {
+    posts: state.posts,
+  };
+}
+
+export default connect(mapStateToProps)(App);
