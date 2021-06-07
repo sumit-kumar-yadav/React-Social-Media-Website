@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar(props) {
   return (
     <nav className="nav">
       <div className="left-div">
-        <img
-          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/ninja-logo-design-template-3a20c3c7d82b98d063f0009c46df185a_screen.jpg?ts=1594374209"
-          style={{ width: 50 }}
-          alt="logo"
-        />
+        <Link to="/">
+          <img
+            src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/ninja-logo-design-template-3a20c3c7d82b98d063f0009c46df185a_screen.jpg?ts=1594374209"
+            style={{ width: 50 }}
+            alt="logo"
+          />
+        </Link>
       </div>
       <div className="search-container">
         <img
@@ -48,9 +51,15 @@ function Navbar(props) {
         </div>
         <div className="nav-links">
           <ul>
-            <li>Log in</li>
-            <li>Log out</li>
-            <li>Register</li>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
+              <Link to="/logout">Log out</Link>
+            </li>
+            <li>
+              <Link to="/signup">Register</Link>
+            </li>
           </ul>
         </div>
       </div>
