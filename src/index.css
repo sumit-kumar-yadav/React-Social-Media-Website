@@ -409,6 +409,9 @@ nav .nav-links ul li:hover {
 .field button:hover {
   cursor: pointer;
 }
+.field button:disabled {
+  cursor: not-allowed;
+}
 
 /* SETTINGS and USERPROFILE */
 .settings {
