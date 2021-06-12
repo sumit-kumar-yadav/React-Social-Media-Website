@@ -8,6 +8,6 @@ export function getFormBody(params) {
     formBody.push(encodedKey + '=' + encodedValue);
   }
 
-  formBody = ['user%20name=sumit%20123', 'password=123'];
+  // formBody = ['user%20name=sumit%20123', 'password=123'];
   return formBody.join('&'); // 'user%20name=sumit%20123&password=123'
 }

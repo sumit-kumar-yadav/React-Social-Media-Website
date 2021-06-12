@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login } from './';
-
-// Dummy component to understand routing in react
-const Signup = () => <div>Signup</div>;
+import { Home, Navbar, Page404, Login, Signup } from './';
 
 class App extends Component {
   componentDidMount() {
