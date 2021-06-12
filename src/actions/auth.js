@@ -45,6 +45,8 @@ export function login(email, password) {
         if (data.success) {
           // dispatch action to save user
           dispatch(loginSuccess(data.data.user));
+          // Save the token in local storage
+          localStorage.setItem('token', data.data.token);
           return;
         }
         // else
@@ -70,9 +72,11 @@ export function signup(email, password, confirmPassword, name) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log('data', data);
+        console.log('data', data);
         if (data.success) {
-          // do something
+          // Save the token in local storage
+          localStorage.setItem('token', data.data.token);
+          // dispatch action to save user
           dispatch(signupSuccessful(data.data.user));
           return;
         }
