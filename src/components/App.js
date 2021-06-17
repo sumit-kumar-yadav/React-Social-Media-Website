@@ -11,7 +11,15 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
 import { authenticateUser } from '../actions/auth';
-import { Home, Navbar, Page404, Login, Signup, Settings } from './';
+import {
+  Home,
+  Navbar,
+  Page404,
+  Login,
+  Signup,
+  Settings,
+  UserProfile,
+} from './';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 // PrivateRoute component
@@ -83,6 +91,12 @@ class App extends Component {
               component={Settings}
               isLoggedin={auth.isLoggedin}
             />
+            <PrivateRoute
+              path="/user/:userId"
+              component={UserProfile}
+              isLoggedin={auth.isLoggedin}
+            />
+
             <Route component={Page404} />
           </Switch>
         </div>
