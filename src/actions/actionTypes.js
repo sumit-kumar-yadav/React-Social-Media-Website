@@ -16,3 +16,7 @@ export const LOG_OUT = 'LOG_OUT';
 
 // Clear the error form auth state on changing the component
 export const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
+
+// Edit the user's details using settings
+export const EDIT_USER_SUCCESSFUL = 'EDIT_USER_SUCCESSFUL';
+export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';

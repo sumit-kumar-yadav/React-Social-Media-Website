@@ -12,6 +12,7 @@ import jwtDecode from 'jwt-decode';
 import { fetchPosts } from '../actions/posts';
 import { authenticateUser } from '../actions/auth';
 import { Home, Navbar, Page404, Login, Signup, Settings } from './';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 // PrivateRoute component
 const PrivateRoute = (privateRouteProps) => {
@@ -43,7 +44,7 @@ class App extends Component {
     // Fetch the posts through API call
     this.props.dispatch(fetchPosts());
 
-    const token = localStorage.getItem('token');
+    const token = getAuthTokenFromLocalStorage();
     if (token) {
       // If token exists
       const user = jwtDecode(token); // Decode the data from token

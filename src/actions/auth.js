@@ -8,6 +8,8 @@ import {
   AUTHENTICATE_USER,
   LOG_OUT,
   CLEAR_AUTH_STATE,
+  EDIT_USER_SUCCESSFUL,
+  EDIT_USER_FAILED,
 } from './actionTypes';
 import { APIUrls } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
@@ -124,5 +126,55 @@ export function logoutUser() {
 export function clearAuthState() {
   return {
     type: CLEAR_AUTH_STATE,
+  };
+}
+
+// Edit the user's details using settings
+export function editUserSuccessful(user) {
+  return {
+    type: EDIT_USER_SUCCESSFUL,
+    user,
+  };
+}
+
+export function editUserFailed(error) {
+  return {
+    type: EDIT_USER_FAILED,
+    error,
+  };
+}
+
+export function editUser(name, password, confirmPassword, userId) {
+  return (dispatch) => {
+    const url = APIUrls.editProfile();
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+      body: getFormBody({
+        name,
+        password,
+        confirm_password: confirmPassword,
+        id: userId,
+      }),
+    })
+      .then((repsonse) => repsonse.json())
+      .then((data) => {
+        console.log('data', data);
+        if (data.success) {
+          dispatch(editUserSuccessful(data.data.user));
+
+          // If request is successful then user's data is changed and therefore token is changed
+          if (data.data.token) {
+            localStorage.setItem('token', data.data.token);
+          }
+          return;
+        }
+
+        dispatch(editUserFailed(data.message));
+      });
   };
 }

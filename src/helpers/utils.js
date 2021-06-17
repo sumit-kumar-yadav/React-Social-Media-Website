@@ -11,3 +11,7 @@ export function getFormBody(params) {
   // formBody = ['user%20name=sumit%20123', 'password=123'];
   return formBody.join('&'); // 'user%20name=sumit%20123&password=123'
 }
+
+export function getAuthTokenFromLocalStorage() {
+  return localStorage.getItem('token');
+}
