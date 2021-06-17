@@ -12,7 +12,7 @@ import {
   EDIT_USER_FAILED,
 } from './actionTypes';
 import { APIUrls } from '../helpers/urls';
-import { getFormBody } from '../helpers/utils';
+import { getAuthTokenFromLocalStorage, getFormBody } from '../helpers/utils';
 
 export function startLogin() {
   return {
@@ -161,9 +161,9 @@ export function editUser(name, password, confirmPassword, userId) {
         id: userId,
       }),
     })
-      .then((repsonse) => repsonse.json())
+      .then((response) => response.json())
       .then((data) => {
-        console.log('data', data);
+        console.log('Edited data', data);
         if (data.success) {
           dispatch(editUserSuccessful(data.data.user));
 
