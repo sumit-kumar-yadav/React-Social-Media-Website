@@ -11,10 +11,7 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
 import { authenticateUser } from '../actions/auth';
-import { Home, Navbar, Page404, Login, Signup } from './';
-
-// Dummy setting component
-const Settings = () => <div>Setting</div>;
+import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 
 // PrivateRoute component
 const PrivateRoute = (privateRouteProps) => {
