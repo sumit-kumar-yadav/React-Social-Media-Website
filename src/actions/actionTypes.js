@@ -20,3 +20,8 @@ export const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
 // Edit the user's details using settings
 export const EDIT_USER_SUCCESSFUL = 'EDIT_USER_SUCCESSFUL';
 export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';
+
+// Fetch user's profile
+export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
+export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
+export const USER_PROFILE_FAILURE = 'USER_PROFILE_FAILURE';

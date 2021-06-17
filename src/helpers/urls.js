@@ -6,4 +6,5 @@ export const APIUrls = {
   fetchPosts: (page = 1, limit = 5) =>
     `${API_ROOT}/posts?page=${page}&limit=${limit}`,
   editProfile: () => `${API_ROOT}/users/edit`,
+  userProfile: (userId) => `${API_ROOT}/users/${userId}`,
 };
