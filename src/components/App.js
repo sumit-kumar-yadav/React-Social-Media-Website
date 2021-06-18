@@ -21,6 +21,7 @@ import {
   UserProfile,
 } from './';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { fetchUserFriends } from '../actions/friends';
 
 // PrivateRoute component
 const PrivateRoute = (privateRouteProps) => {
@@ -66,11 +67,14 @@ class App extends Component {
           name: user.name,
         })
       );
+
+      // Fetch user's friends
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
-    const { posts, auth } = this.props;
+    const { posts, auth, friends } = this.props;
     return (
       // Tell the react that this is our root component and we will work inside it
       <Router>
@@ -81,7 +85,14 @@ class App extends Component {
               exact
               path="/"
               render={(props) => {
-                return <Home {...props} posts={posts} />;
+                return (
+                  <Home
+                    {...props}
+                    posts={posts}
+                    friends={friends}
+                    isLoggedin={auth.isLoggedin}
+                  />
+                );
               }}
             />
             <Route path="/login" component={Login} />
@@ -115,6 +126,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     auth: state.auth,
+    friends: state.friends,
   };
 }
 
