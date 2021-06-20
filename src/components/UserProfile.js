@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserProfile } from '../actions/profile';
+import { APIUrls } from '../helpers/urls';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { addFriend } from '../actions/friends';
 
 class UserProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      success: null,
+      error: null,
+    };
+  }
+
   componentDidMount() {
     const { match } = this.props;
 
@@ -26,6 +37,35 @@ class UserProfile extends Component {
     return false;
   };
 
+  handleAddFriendClick = async () => {
+    const userId = this.props.match.params.userId;
+    const url = APIUrls.addFriend(userId);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    if (data.success) {
+      this.setState({
+        success: true,
+      });
+
+      this.props.dispatch(addFriend(data.data.friendship));
+    } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
+    }
+  };
+
   render() {
     const {
       match: { params },
@@ -36,6 +76,7 @@ class UserProfile extends Component {
 
     // check if current user is already friend of profile user
     const isUserAFriend = this.checkIfUserIsAFriend();
+    const { success, error } = this.state;
 
     if (profile.inProgress) {
       return <h1>Loading!</h1>;
@@ -60,9 +101,19 @@ class UserProfile extends Component {
           <div className="field-value">{user.email}</div>
         </div>
 
+        {success && (
+          <div className="alert success-dailog">Friend added successfully</div>
+        )}
+        {error && <div className="alert error-dailog">{error}</div>}
+
         <div className="btn-grp">
           {!isUserAFriend ? (
-            <button className="button save-btn">Add Friend</button>
+            <button
+              className="button save-btn"
+              onClick={this.handleAddFriendClick}
+            >
+              Add Friend
+            </button>
           ) : (
             <button className="button save-btn">Remove Friend</button>
           )}
