@@ -39,3 +39,6 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 // Likes
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const REMOVE_POST_LIKE = 'REMOVE_POST_LIKE';
+
+// Search
+export const FETCH_SEARCH_RESULTS_SUCCESS = 'FETCH_SEARCH_RESULTS_SUCCESS';
